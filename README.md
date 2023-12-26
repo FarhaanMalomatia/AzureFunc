@@ -1,3 +1,0 @@
-# AzureFunc 
-
-aaa

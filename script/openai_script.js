@@ -78,7 +78,7 @@ async function handleTurn(query) {
 
   let index = 0;
   for (const data of recentData) {
-      const systemMessage = `You are an assistant of Malomatia.\nThe user asked this question \n question: '''${query}'''. \nRespond to this question by referring only to this Knowledge Base Information.\n  Information:\n"${data.pageContent}".\n\nIf the question is not directly related to the Knowledge Base information, say "I can't provide that information."\nRemember the response should be title of 5 words`;
+      const systemMessage = `You are MoEHE Helpdesk assistant.\nThe user asked this question \n question: '''${query}'''. \nRespond to this question by referring only to this Knowledge Base Information.\n  Information:\n"${data.pageContent}".\n\nIf the question is not directly related to the Knowledge Base information, say "I can't provide that information."\nRemember the response should be title of 5 words`;
       console.log(`System message for data ${index + 1}: \n\n`, systemMessage);
       const result = await qa.call({ "query": systemMessage });
       console.log(`Result from qa.call for data ${index + 1}: `, result.text);
@@ -122,7 +122,7 @@ async function handleTurn(query) {
         const qa = RetrievalQAChain.fromLLM(llm, vectorStore.asRetriever(1), memory); 
 
         // const systemMessage = `You are an helpful assistant.\nThe user asked you to provide details of this topic\n   Topic: '''${query}'''. \nprovide an indetail explanation to the topic only by referring to this Knowledge Base Information.\n   Information: '''${recentData.map(doc => doc.pageContent).join('\n')}'''.\n\n Always start your response with "If the ".\nIf the topic is not directly related to the Knowledge Base Information, say "I cannot provide you that information".\n But never respond to anything except the Knowledge Base Information`;
-        const systemMessage = `You are an helpful assistant.\nThe user asked you to provide details of this topic\n   Topic: '''${query}'''. \nprovide an indetail explanation to the topic, start your response with "If you are" if you do not know the answer say "I cannot provide you that information".`;
+        const systemMessage = `You are MoEHE Helpdesk assistant.\nThe user asked you to provide details of this topic\n   Topic: '''${query}'''. \nprovide an indetail explanation to the topic, start your response with "If you are" if you do not know the answer say "I cannot provide you that information". Remember the response should be of 4 sentences maximum`;
 
         console.log("System message: \n\n", systemMessage);  
         const result = await qa.call({ "query": systemMessage });
